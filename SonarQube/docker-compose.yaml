@@ -1,6 +1,6 @@
 services:
   sonarqube:
-    image: sonarqube:lts-community
+    image: sonarqube:25.3.0.104237-community
     depends_on:
       - sonar_db
     environment:
@@ -17,7 +17,7 @@ services:
       - sonarqube_temp:/opt/sonarqube/temp
 
   sonar_db:
-    image: postgres:13
+    image: postgres:17.4
     environment:
       POSTGRES_USER: sonar
       POSTGRES_PASSWORD: sonar
