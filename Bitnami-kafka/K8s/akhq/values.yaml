@@ -1,0 +1,54 @@
+configuration:
+  micronaut:
+    security:
+      enabled: true
+  akhq:
+    connections:
+      kafka-server:
+        properties:
+          bootstrap.servers: "kafka:9092"
+        schema-registry:
+          url: "http://schema-registry:8085"
+        connect:
+          - name: "connect"
+            url: "http://connect:8083"
+    security:
+      default-group: no-roles
+      basic-auth:
+        - username: dev
+          password: "ef260e9aa3c673af240d17a2660480361a8e081d1ffeca2a5ed0e3219fc18567"
+          groups:
+            - admin
+        - username: qa
+          password: "3f3ef786b34d6dd716e1812c8b74a7a0e1f05aa5f3230588f6f5bcd00c6c8392"
+          groups:
+            - reader
+
+readinessProbe:
+  enabled: false
+  prefix: ""
+  path: /health
+  port: management
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+  httpGetExtra: {}
+
+livenessProbe:
+  enabled: false
+  path: /health
+  port: management
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+  httpGetExtra: {}
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 8080
+  managementPort: 28081
