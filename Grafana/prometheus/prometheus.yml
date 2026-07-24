@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: spring-boot-app-dev
+    metrics_path: /actuator/prometheus
+    static_configs:
+      - targets:
+          - PC-David:8081
+        labels:
+          env: dev
+          service: spring-boot-service-dev
