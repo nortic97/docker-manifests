@@ -70,3 +70,14 @@ services:
     restart: unless-stopped
     networks:
       - observability
+
+  us-eureka:
+    build:
+      context: ./eureka
+      dockerfile: Dockerfile
+    container_name: us-eureka
+    ports:
+      - "8761:8761"
+    restart: unless-stopped
+    networks:
+      - observability

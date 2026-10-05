@@ -5,7 +5,7 @@
 local.file_match "application_logs" {
   path_targets = [
     {
-      __path__ = "/var/log/*.log",
+      __path__ = "/var/log/*/*.log",
       env      = "local",
     },
   ]
@@ -18,6 +18,32 @@ local.file_match "application_logs" {
 
 loki.source.file "application_logs" {
   targets    = local.file_match.application_logs.targets
+  forward_to = [loki.process.application_logs.receiver]
+}
+
+
+// ========================================
+// Process application logs
+// ========================================
+
+loki.process "application_logs" {
+
+  // Extract service name from directory
+  // Example:
+  // /var/log/es-store/es-store.log
+  //              └── service = es-store
+  stage.regex {
+    source     = "filename"
+    expression = "/var/log/(?P<service>[^/]+)/[^/]+\\.log"
+  }
+
+  // Add extracted service as Loki label
+  stage.labels {
+    values = {
+      service = "service",
+    }
+  }
+
   forward_to = [loki.write.loki.receiver]
 }
 
