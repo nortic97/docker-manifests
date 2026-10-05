@@ -1,7 +1,6 @@
-version: "3"
 services:
   kafka:
-    image: 'bitnami/kafka:latest'
+    image: 'bitnamilegacy/kafka:4.0.0-debian-12-r10'
     restart: "unless-stopped"
     ports:
       - '9092:9094'  # Exponer el puerto 9092 para uso interno y externo

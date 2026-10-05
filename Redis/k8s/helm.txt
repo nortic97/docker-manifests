@@ -1,0 +1,2 @@
+#redis
+helm upgrade --install redis oci://registry-1.docker.io/bitnamicharts/redis --namespace redis --create-namespace --values redis/values.yaml

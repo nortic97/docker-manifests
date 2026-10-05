@@ -1,0 +1,23 @@
+image:
+  registry: docker.io
+  repository: bitnamilegacy/redis
+  tag: 8.2.1-debian-12-r0
+
+auth:
+  enabled: true
+  password: "N0r71c"
+
+acl:
+  enabled: true
+  users:
+    - username: "admin"
+      password: "admin"
+      enabled: "on"
+      commands: "+@all"     # acceso a todos los comandos
+      keys: "~*"            # acceso a todas las keys
+      channels: "&*"        # acceso a todos los canales
+    - username: "consulta"
+      password: "consulta"
+      enabled: "on"
+      commands: "+@read"    # solo lectura
+      keys: "~*"
