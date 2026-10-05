@@ -63,6 +63,7 @@ services:
       - alloy-storage:/var/lib/alloy/data
       - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
       - "/mnt/c/Users/akile/Documents/Proyectos/Nortic/Selling System/selling-system-api/logs:/var/log:ro"
+      - "/mnt/c/Program Files/Apache Software Foundation/Tomcat 11.0/logs:/var/log/tomcat:ro"
     command:
       - run
       - /etc/alloy/config.alloy
