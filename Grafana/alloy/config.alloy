@@ -1,12 +1,11 @@
 // ========================================
-// Read application log file
+// Match application log files
 // ========================================
 
-local.file_match "es_store_logs" {
+local.file_match "application_logs" {
   path_targets = [
     {
-      __path__ = "/var/log/es-store/*.log",
-      service  = "es-store",
+      __path__ = "/var/log/*.log",
       env      = "local",
     },
   ]
@@ -14,11 +13,11 @@ local.file_match "es_store_logs" {
 
 
 // ========================================
-// Read logs
+// Read application logs
 // ========================================
 
-loki.source.file "es_store" {
-  targets    = local.file_match.es_store_logs.targets
+loki.source.file "application_logs" {
+  targets    = local.file_match.application_logs.targets
   forward_to = [loki.write.loki.receiver]
 }
 

@@ -25,6 +25,7 @@ services:
     depends_on:
       - prometheus
       - loki
+      - alloy
     restart: unless-stopped
     networks:
       - observability
@@ -61,7 +62,7 @@ services:
     volumes:
       - alloy-storage:/var/lib/alloy/data
       - ./alloy/config.alloy:/etc/alloy/config.alloy:ro
-      - ./logs:/var/log/es-store:ro
+      - "/mnt/c/Users/akile/Documents/Proyectos/Nortic/Selling System/selling-system-api/logs:/var/log:ro"
     command:
       - run
       - /etc/alloy/config.alloy

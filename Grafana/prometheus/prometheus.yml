@@ -3,7 +3,7 @@ global:
   evaluation_interval: 5s
 
 scrape_configs:
-  - job_name: 'selling-system--microservices'
+  - job_name: 'selling-system-microservices'
     eureka_sd_configs:
       - server: 'http://PC-David:8761/eureka'
     relabel_configs:
